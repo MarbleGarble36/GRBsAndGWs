@@ -8,6 +8,8 @@ import numpy as np
 formulalist = []
 graphlist = []
 
+L0 = 1e52
+
 t = np.arange(0, 1.6, .01)
 
 Flim = 10 ** (-9)
@@ -90,11 +92,13 @@ def newgraph(formula):
     gll = len(graphlist)
     globals()['graph{numb}'.format(numb=gll)] = tk.Frame()
 
-    globals()['fig{numb}'.format(numb=gll)], globals()['ax{numb}'.format(numb=gll)] = plt.subplots(2, 1)
-    globals()['l{numb}-1'.format(numb=gll)] = globals()['ax{numb}'.format(numb=gll)][0].plot(t, eval(formula))
-    globals()['l{numb}-2'.format(numb=gll)] = globals()['ax{numb}'.format(numb=gll)][1].plot(t, np.sqrt(eval(formula)/(4*np.pi*Flim)))
+    globals()['fig{numb}'.format(numb=gll)], globals()['ax{numb}'.format(numb=gll)] = plt.subplots(2, 2)
+    globals()['l{numb}-1'.format(numb=gll)] = globals()['ax{numb}'.format(numb=gll)][0,0].plot(t, eval(formula))
+    globals()['l{numb}-2'.format(numb=gll)] = globals()['ax{numb}'.format(numb=gll)][0,1].plot(t, np.sqrt(eval(formula)/(4*np.pi*Flim)))
+    globals()['l{numb}-3'.format(numb=gll)] = globals()['ax{numb}'.format(numb=gll)][1,0].plot(t, 2*np.pi*(1-np.cos(t)))
+    globals()['l{numb}-4'.format(numb=gll)] = globals()['ax{numb}'.format(numb=gll)][1,1].plot(t, (np.sqrt(eval(formula)/(4*np.pi*Flim)))**3 * 2*np.pi*(1-np.cos(t)))
 
-    globals()['ax{numb}'.format(numb=gll)][0].set(xlabel='Inclination angle (radians)', ylabel='Luminosity (erg/s)', title='Luminosity for given angle')
+    globals()['ax{numb}'.format(numb=gll)][0,0].set(xlabel='Inclination angle (radians)', ylabel='Luminosity (erg/s)', title='Luminosity for given angle')
 
     globals()['canvas{numb}'.format(numb=gll)] = FigureCanvasTkAgg(globals()['fig{numb}'.format(numb=gll)], master=globals()['graph{numb}'.format(numb=gll)])
     globals()['canvas{numb}'.format(numb=gll)].draw()
