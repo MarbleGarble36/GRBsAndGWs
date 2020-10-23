@@ -10,6 +10,8 @@ graphlist = []
 
 t = np.arange(0, 1.6, .01)
 
+Flim = 10 ** (-9)
+
 f = open("formulas.txt", "r")
 for x in f:
     formulalist.append(x)
@@ -88,10 +90,11 @@ def newgraph(formula):
     gll = len(graphlist)
     globals()['graph{numb}'.format(numb=gll)] = tk.Frame()
 
-    globals()['fig{numb}'.format(numb=gll)], globals()['ax{numb}'.format(numb=gll)] = plt.subplots()
-    globals()['ax{numb}'.format(numb=gll)].plot(t, eval(formula))
+    globals()['fig{numb}'.format(numb=gll)], globals()['ax{numb}'.format(numb=gll)] = plt.subplots(2, 1)
+    globals()['l{numb}-1'.format(numb=gll)] = globals()['ax{numb}'.format(numb=gll)][0].plot(t, eval(formula))
+    globals()['l{numb}-2'.format(numb=gll)] = globals()['ax{numb}'.format(numb=gll)][1].plot(t, np.sqrt(eval(formula)/(4*np.pi*Flim)))
 
-    globals()['ax{numb}'.format(numb=gll)].set(xlabel='Inclination angle (radians)', ylabel='Luminosity (erg/s)', title='Luminosity for given angle')
+    globals()['ax{numb}'.format(numb=gll)][0].set(xlabel='Inclination angle (radians)', ylabel='Luminosity (erg/s)', title='Luminosity for given angle')
 
     globals()['canvas{numb}'.format(numb=gll)] = FigureCanvasTkAgg(globals()['fig{numb}'.format(numb=gll)], master=globals()['graph{numb}'.format(numb=gll)])
     globals()['canvas{numb}'.format(numb=gll)].draw()
