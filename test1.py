@@ -130,5 +130,3 @@ entry.pack()
 confirmbutton.pack(anchor="e")
 
 root.mainloop()
-
-#CommitTest
