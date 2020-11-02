@@ -96,7 +96,7 @@ def newgraph(formula):
     globals()['l{numb}-1'.format(numb=gll)] = globals()['ax{numb}'.format(numb=gll)][0,0].plot(t, eval(formula))
     globals()['l{numb}-2'.format(numb=gll)] = globals()['ax{numb}'.format(numb=gll)][0,1].plot(t, np.sqrt(eval(formula)/(4*np.pi*Flim)))
     globals()['l{numb}-3'.format(numb=gll)] = globals()['ax{numb}'.format(numb=gll)][1,0].plot(t, 2*np.pi*(1-np.cos(t)))
-    globals()['l{numb}-4'.format(numb=gll)] = globals()['ax{numb}'.format(numb=gll)][1,1].plot(t, (np.sqrt(eval(formula)/(4*np.pi*Flim)))**3 * 2*np.pi*(1-np.cos(t)))
+    globals()['l{numb}-4'.format(numb=gll)] = globals()['ax{numb}'.format(numb=gll)][1,1].plot(t, (np.sqrt(eval(formula)/(4*np.pi*Flim)))**3 * 2*np.pi*(1-np.cos(np.pi)))
 
     globals()['ax{numb}'.format(numb=gll)][0,0].set(xlabel='Inclination angle (radians)', ylabel='Luminosity (erg/s)', title='Luminosity for given angle')
 
