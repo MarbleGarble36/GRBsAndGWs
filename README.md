@@ -15,6 +15,6 @@ Dependencies:
 -   from matplotlib.backends.backend_tkagg: FigureCanvasTkAgg, NavigationToolbar2Tk
 -   numpy
 
-## HeadingGravitational Wave model (-):
+## Gravitational Wave model (-):
 
 -
