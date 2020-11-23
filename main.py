@@ -58,17 +58,20 @@ class ScrollableFrame(tk.Frame):
 selection = ScrollableFrame(root)
 selection.pack(side=tk.LEFT, anchor="n")
 
-class graphObject:
+class GRBGraphObject:
     def __init__(self, formula):
         for i in graphlist:
             i.graph.pack_forget()
         self.graph = tk.Frame()
 
         self.fig, self.ax = plt.subplots(1, 2)
-        self.fig.set_size_inches(4, 2)
+        self.fig.set_size_inches(7, 3)
+        self.fig.subplots_adjust(bottom=0.2)
         self.mdfig = plt.figure()
         self.mdax1 = self.mdfig.add_subplot(121)
         self.mdax2 = self.mdfig.add_subplot(122, projection='3d')
+        self.mdfig.set_size_inches(4, 3)
+        self.mdfig.subplots_adjust(bottom=0.2)
 
         self.l1 = self.ax[0].plot(t, eval(formula))
         self.l2 = self.ax[1].plot(t, np.sqrt(eval(formula)/(4*np.pi*Flim)))
@@ -105,13 +108,13 @@ class graphObject:
         self.graph.pack(side=tk.RIGHT,anchor="n")
 
 def new(newformula):
-    graphlist.append(graphObject(newformula))
+    graphlist.append(GRBGraphObject(newformula))
     f = open("formulas.txt", "a")
     f.write(newformula + "\n")
     f.close()
 
 for i in formulalist:
-    graphlist.append(graphObject(i))
+    graphlist.append(GRBGraphObject(i))
     graphlist[-1].graph.pack_forget()
 graphlist[0].graph.pack(side=tk.RIGHT,anchor="n")
 
