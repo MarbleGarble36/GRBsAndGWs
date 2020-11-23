@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
-import GRBgraph
 
 formulalist, graphlist = [], []
 
@@ -60,11 +59,10 @@ selection = ScrollableFrame(root)
 selection.pack(side=tk.LEFT, anchor="n")
 
 class graphObject:
-    def __init__(self, formula, graphnr):
+    def __init__(self, formula):
         for i in graphlist:
             i.graph.pack_forget()
         self.graph = tk.Frame()
-        self.graphnr = graphnr
 
         self.fig, self.ax = plt.subplots(1, 2)
         self.fig.set_size_inches(4, 2)
@@ -107,13 +105,13 @@ class graphObject:
         self.graph.pack(side=tk.RIGHT,anchor="n")
 
 def new(newformula):
-    graphlist.append(graphObject(newformula, len(graphlist)))
+    graphlist.append(graphObject(newformula))
     f = open("formulas.txt", "a")
     f.write(newformula + "\n")
     f.close()
 
 for i in formulalist:
-    graphlist.append(graphObject(i, len(graphlist)))
+    graphlist.append(graphObject(i))
     graphlist[-1].graph.pack_forget()
 graphlist[0].graph.pack(side=tk.RIGHT,anchor="n")
 
