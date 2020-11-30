@@ -78,8 +78,10 @@ class GRBGraphObject:
         self.mdax1.plot(t2, 2*np.pi*(1-np.cos(t2)))
         self.mdax2.plot(t, t2, (np.sqrt(eval(formula)/(4*np.pi*Flim)))**3 * 2*np.pi*(1-np.cos(t2)))
 
-        self.ax[0].set(xlabel='Inclination angle (radians)', ylabel='Luminosity (erg/s)', title='Luminosity for given angle')
-        self.ax[1].set(xlabel='Inclination angle (radians)', ylabel='distance dL', title='Luminosity distance for given angle')
+        self.ax[0].set(xlabel='Inclination angle (radians)', ylabel='Luminosity (erg/s)')
+        self.ax[0].set_title('Luminosity for given angle', y=1.04)
+        self.ax[1].set(xlabel='Inclination angle (radians)', ylabel='distance dL')
+        self.ax[1].set_title('Luminosity distance for given angle', y=1.04)
         self.mdax1.set(xlabel='t2 (radians)', ylabel='Solid Angle Ω', title='Solid Angle? for t2')
         self.mdax2.set(xlabel='t (radians)', ylabel='t2 (radians)', zlabel="# events", title='Number of events?')
 
