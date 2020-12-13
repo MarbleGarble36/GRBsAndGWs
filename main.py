@@ -106,16 +106,16 @@ class GWGraphObject:   #Graph object
         self.fig.subplots_adjust(bottom=0.12, hspace=0.42, left=0.074, right=0.96)
 
         self.l1 = self.ax[0,0].plot(t, eval(formula))   #Luminosity over angle
-        self.l2 = self.ax[0,1].plot(t, eval(formula)/(4*np.pi*Glim))   #Luminosity distance over angle
-        self.l2 = self.ax[1,0].plot(t, 2*np.pi*(1-np.cos(t)))   #Solid angle
-        self.l2 = self.ax[1,1].plot(t, (np.sqrt(eval(formula)/(4*np.pi*Flim)))**3 * 2*np.pi*(1-np.cos(t)))  #Number of events
+        self.l2 = self.ax[1,0].plot(t, eval(formula)/(4*np.pi*Glim))   #Luminosity distance over angle
+        self.l2 = self.ax[0,1].plot(t, 2*np.pi*(1-np.cos(t)))   #Solid angle
+        self.l2 = self.ax[0,2].plot(t, (np.sqrt(eval(formula)/(4*np.pi*Flim)))**3 * 2*np.pi*(1-np.cos(t)))  #Number of events
 
         self.ax[0,0].set(xlabel='Inclination angle (radians)', ylabel='Luminosity (erg/s)')
         self.ax[0,0].set_title('Luminosity for given angle', y=1.04)
         self.ax[0,1].set(xlabel='Inclination angle (radians)', ylabel='distance dL')
         self.ax[0,1].set_title('Luminosity distance for given angle', y=1.04)
         self.ax[1,0].set(xlabel='t (radians)', ylabel='Solid Angle Ω')
-        self.ax[1,0].set_title('Solid Angle for t', y=1.04)
+        self.ax[1,0].set_title('Distance', y=1.04)
         self.ax[1,1].set(xlabel='t (radians)', ylabel='# events')
         self.ax[1,1].set_title('Number of events', y=1.04)
 
