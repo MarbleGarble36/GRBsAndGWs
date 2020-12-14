@@ -1,7 +1,7 @@
-L0 * np.cos(t)
--t * L0 + L0
-L0 / t
--np.sqrt(L0**2 * t) + L0
-L0 * 0.5 ** (6*t)
--0.5 * L0 * (t)**2 + L0
-t ** (-1) * L0 * 1e-2
+L0 * np.cos(th)
+-th * L0 + L0
+L0 / th
+-np.sqrt(L0**2 * th) + L0
+L0 * 0.5 ** (6*th)
+-0.5 * L0 * (th)**2 + L0
+th ** (-1) * L0 * 1e-2
