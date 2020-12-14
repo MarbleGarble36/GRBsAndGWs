@@ -58,11 +58,13 @@ phi = np.pi/4 #Phase phi
 G = 6.67384e-11 #Gravitational Constant (from BiNaS)
 c = 299792458 #speed of light
 d = 10000   #Distance between the neutron stars in our binary system
-Glim = 10 ** (-22)   #GW Sensor sensitivity
-fs = 8677.86029     #Orbital frequency in our binary system
 Ms = 1.9884e30      #Mass of the sun
-M = 2.8 * Ms    #Mass of one neutron star
-SM = (M**2)**(3/5) * (2 * M)**(-1/5)    #Funky M
+m = 1.4 * Ms    #Mass of one neutron star
+M = 2 * m
+SM = (m**2)**(3/5) * (2 * m)**(-1/5)    #Funky M
+Glim = 10 ** (-22)   #GW Sensor sensitivity
+T = 2*np.pi*np.sqrt((d/2)**3 / (G*2*m))
+fs = 1/T    #Orbital frequency in our binary system
 
 class GRBGraphObject:   #Graph object for GRBs
     def __init__(self, formula):
@@ -114,7 +116,7 @@ class GWGraphObject:   #Graph object
     def __init__(self):
         self.graph = tk.Frame()
 
-        hp = (2*((G*M)**(5/3))*((np.pi*fs)**(2/3)))/(c**4 * d) * (1 + np.cos(th)**2) * np.cos(2 * phi) #Strain in hplus polarisation
+        hp = (2*((G*2*m)**(5/3))*((np.pi*fs)**(2/3)))/(c**4 * d) * (1 + np.cos(th)**2) * np.cos(2 * phi) #Strain in hplus polarisation
         hx = (-4*((G*SM)**(5/3))*((np.pi*fs)**(2/3)))/(c**4 * d) * np.cos(th) * np.sin(2*phi)   #Strain in hcross polarisation
         h = np.sqrt(hp**2 + hx**2)  #Total Strain
         dh = h/(4*np.pi*Glim)   #'Strain distance'
@@ -194,7 +196,17 @@ graphlist[0].graph.pack(side=tk.RIGHT,anchor="n")
 
 entry = tk.Entry(newformula,width=48)
 confirmbutton = tk.Button(newformula, text='Confirm', width=8, relief=GROOVE, command= lambda: new(entry.get()))
-entry.pack()
+entry.pack(anchor="e")
 confirmbutton.pack(anchor="e")
+lavelvlewl = tk.Label(
+    master=header,
+    text="Flim: " + str(Flim) + "\nNeutron Star Mass: 1,4 Mo\nGlim: " + str(Glim) + "\nNB Distance: " + str(d) + "\nfs: " + str(fs),
+    fg="black",
+    bg="white",
+    width=5,
+    height=5,
+    font=("Helvetica", 12)
+)
+lavelvlewl.pack(fill=tk.X)
 
 root.mainloop()
